@@ -21,8 +21,10 @@ export async function POST(request){
     })
     const restaurant= new restaurantModel(payload)
    const result= await restaurant.save()
+   
+   
 
-    return NextResponse.json({result,status:"sucess"})
+    return NextResponse.json({result,success:true})
 }
 
 
