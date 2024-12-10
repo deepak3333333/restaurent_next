@@ -11,6 +11,7 @@ const { NextResponse } = require("next/server");
 
 export async function POST(request){
     let payload = await request.json();
+    let result;
     await mongoose.connect(connectionStr)
     .then(()=>{
         console.log("connected");
@@ -19,12 +20,16 @@ export async function POST(request){
     .catch((err)=>{
         console.log(err);
     })
-    const restaurant= new restaurantModel(payload)
+    if(payload.login){
+        //user login
+        result=await restaurantModel.find({email:payload.email,password:payload.password})
+    }
+    else{
+        //user create
+        const restaurant= new restaurantModel(payload)
    const result= await restaurant.save()
-   
-   
-
-    return NextResponse.json({result,success:true})
+}
+return NextResponse.json({result,success:true})
 }
 
 
