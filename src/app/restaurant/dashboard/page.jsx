@@ -1,28 +1,48 @@
+'use client'
+import AddFoodItem from '@/app/_components/AddFoodItem'
+import RestaurantFooter from '@/app/_components/RestaurantFooter';
 import RestaurantHeader from '@/app/_components/RestaurnatHeader'
-import React from 'react'
+import React, { useState } from 'react'
 
-const page = () => {
+
+
+
+const Page = () => {
+  const [addItem, setAddItem] = useState(false);
+
   return (
-    <div>
-        <RestaurantHeader/>
+    <div className="min-h-screen bg-gray-100">
+      <RestaurantHeader />
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div className="flex space-x-4">
+          <button
+            onClick={() => setAddItem(true)}
+            className={`py-2 px-4 font-bold rounded-lg ${
+              addItem
+                ? "bg-orange-600 text-white"
+                : "bg-white border border-orange-600 text-orange-600"
+            } hover:bg-orange-700 hover:text-white transition duration-200`}
+          >
+            Add Food Item
+          </button>
+          <button
+            onClick={() => setAddItem(false)}
+            className={`py-2 px-4 font-bold rounded-lg ${
+              !addItem
+                ? "bg-orange-600 text-white"
+                : "bg-white border border-orange-600 text-orange-600"
+            } hover:bg-orange-700 hover:text-white transition duration-200`}
+          >
+            Dashboard
+          </button>
+        </div>
 
-
-
-
-
-
-
-
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse facere doloremque distinctio quaerat ad odio temporibus officia, excepturi molestiae necessitatibus iure corporis cum. Repudiandae ea magnam assumenda aspernatur ipsa eligendi.
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, sunt nihil similique magnam id quo error incidunt ut voluptatum neque corporis animi aut velit nulla accusamus temporibus aspernatur mollitia tenetur!
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta maiores esse sit soluta similique facere, adipisci fugiat dolorem architecto pariatur, aut repellat praesentium deserunt officiis vitae? Ad possimus beatae aliquam?
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident, molestiae. Mollitia, sapiente fugit! Asperiores odit vel impedit sequi, enim sit quidem nostrum, ipsa sint velit est totam veniam possimus exercitationem?
-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate perspiciatis nam totam! Officiis excepturi praesentium beatae ipsa. Ullam dicta necessitatibus explicabo minus quos tempore. Magni recusandae quidem soluta sit id.
-        this is dashboard page
-      
+        <div className="mt-6">{addItem && <AddFoodItem />}</div>
+      </div>
+      <RestaurantFooter/>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;
