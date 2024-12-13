@@ -27,6 +27,7 @@ const RestaurantSignUp = () => {
       setErroor(true);
       if (password != cPassword) {
         setPasswordError(true);
+        return
 
       } else {
         setPasswordError(false);

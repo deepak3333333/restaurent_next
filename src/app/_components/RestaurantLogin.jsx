@@ -9,9 +9,16 @@ const RestaurantLogin = () => {
   const [password,setPassword]=useState("")
   const [error1,setError1]=useState(false)
   const router=useRouter()
+  
 
 
   const handlelogin=async()=>{
+    if(!email || !password){
+      setError1(true)
+      return
+    }
+
+
     
 
 
@@ -47,7 +54,7 @@ const RestaurantLogin = () => {
           onChange={(e)=>setEmail(e.target.value)}
         
         />
-        {error1 && <p className="text-red-500">Please fill all the fields</p>}
+        {error1 &&  email && <p className="text-red-500">Please fill all the fields</p>}
         <input 
           type="password" 
           placeholder='enter your password'
@@ -56,7 +63,7 @@ const RestaurantLogin = () => {
           onChange={(e)=>setPassword(e.target.value)}
        
        />
-        {error1 && <p className="text-red-500">Please fill all the fields</p>}
+        {error1 && password && <p className="text-red-500">Please fill all the fields</p>}
 
         <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors" onClick={handlelogin}>
           Login
