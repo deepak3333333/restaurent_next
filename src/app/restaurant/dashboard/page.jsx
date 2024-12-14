@@ -1,5 +1,6 @@
 'use client'
 import AddFoodItem from '@/app/_components/AddFoodItem'
+import FoodItemList from '@/app/_components/FoodItemList';
 import RestaurantFooter from '@/app/_components/RestaurantFooter';
 import RestaurantHeader from '@/app/_components/RestaurnatHeader'
 import React, { useState } from 'react'
@@ -38,7 +39,7 @@ const Page = () => {
           </button>
         </div>
 
-        <div className="mt-6">{addItem && <AddFoodItem />}</div>
+        <div className="mt-6">{addItem?<AddFoodItem/>:<FoodItemList/>}</div>
       </div>
       <RestaurantFooter/>
     </div>

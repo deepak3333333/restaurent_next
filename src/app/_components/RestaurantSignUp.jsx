@@ -44,12 +44,15 @@ const RestaurantSignUp = () => {
 
     response = await response.json();
 
-    if (response.success) {
+    if (response.success && response.result) {
       const { result } = response;
       delete result.password;
       localStorage.setItem("restaurantUser", JSON.stringify(result));
       router.push("/restaurant/dashboard");
-    }
+  } else {
+      console.log("API response does not contain a valid result:", response);
+  }
+  
   };
 
   return (
