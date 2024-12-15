@@ -13,16 +13,16 @@ const RestaurantHeader = () => {
   };
 
   useEffect(() => {
-    let data = localStorage.getItem("restaurantUser");
+    let data = JSON.parse(localStorage.getItem("restaurantUser"));
     if (!data) {
       router.push("/restaurant");
     } 
     else if(data){
       router.push("/restaurant/dashboard");
-      setDetails(JSON.parse(data))
+      setDetails((data))
     }
     else {
-      setDetails(JSON.parse(data));
+      setDetails((data));
     }
   }, [router]);
 

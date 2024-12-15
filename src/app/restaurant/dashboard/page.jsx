@@ -39,7 +39,7 @@ const Page = () => {
           </button>
         </div>
 
-        <div className="mt-6">{addItem?<AddFoodItem/>:<FoodItemList/>}</div>
+        <div className="mt-6">{addItem?<AddFoodItem setAddItem={setAddItem}/>:<FoodItemList/>}</div>
       </div>
       <RestaurantFooter/>
     </div>

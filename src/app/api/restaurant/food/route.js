@@ -14,7 +14,7 @@ export async function POST(request) {
     const food=new foodSchema(payload)
     const result=await food.save()
     if(result){
-        success:true
+       success=true
     }
 
     return NextResponse.json({result,success})
