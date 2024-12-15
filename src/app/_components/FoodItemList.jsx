@@ -63,6 +63,13 @@ function FoodItemList() {
   </h1>
 )}
 
+     
+
+{foodItems && (
+  <h1 className="text-center text-red-600 bg-red-100 p-4 rounded-md shadow-md">
+    No food items found
+  </h1>
+)}
 
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300 rounded-lg shadow-lg">
@@ -75,9 +82,12 @@ function FoodItemList() {
               <th className="px-4 py-2 border border-gray-300">Description</th>
               <th className="px-4 py-2 border border-gray-300">Actions</th>
             </tr>
+            
           </thead>
+          
          
           <tbody>
+            
             {foodItems &&
               foodItems.map((item, key) => (
                 <tr

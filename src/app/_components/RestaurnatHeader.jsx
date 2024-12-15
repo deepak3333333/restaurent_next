@@ -39,6 +39,8 @@ const RestaurantHeader = () => {
                 alt="Restaurant Logo"
               />
             </div>
+
+         <h1> welcome {details.name}</h1> 
             <div>
               <ul className="flex space-x-8">
                 <li>
