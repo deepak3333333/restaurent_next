@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter,usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const RestaurantHeader = () => {
   const [details, setDetails] = useState("");
   const router = useRouter();
+  const pathName=usePathname()
 
   const logout = () => {
     localStorage.removeItem("restaurantUser");
@@ -17,7 +18,7 @@ const RestaurantHeader = () => {
     if (!data) {
       router.push("/restaurant");
     } 
-    else if(data){
+    else if(data && pathName=="/restaurant"){
       router.push("/restaurant/dashboard");
       setDetails((data))
     }
@@ -40,7 +41,7 @@ const RestaurantHeader = () => {
               />
             </div>
 
-         <h1> welcome {details.name}</h1> 
+         { details && <h1> welcome {details.name}</h1> }
             <div>
               <ul className="flex space-x-8">
                 <li>

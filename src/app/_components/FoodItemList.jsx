@@ -1,11 +1,15 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-function FoodItemList() {
+
+function FoodItemList(props) {
   const [deleltedmessage,setDeletedmessage]=useState(false)
   const [foodItems, setFoodItems] = useState();
   const [spinner,setSpinner]=useState(true)
+  const router=useRouter()
+ 
   useEffect(() => {
     loadFoodItems();
   }, []);
@@ -53,6 +57,7 @@ function FoodItemList() {
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
         Food Item List
       </h1>
+      
       {spinner && <div className="flex items-center justify-center min-h-screen">
   <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
 </div>}
@@ -65,7 +70,7 @@ function FoodItemList() {
 
      
 
-{foodItems && (
+{!foodItems && (
   <h1 className="text-center text-red-600 bg-red-100 p-4 rounded-md shadow-md">
     No food items found
   </h1>
@@ -113,7 +118,9 @@ function FoodItemList() {
                     {item.description}
                   </td>
                   <td className="px-4 py-2 border border-gray-300 text-center">
-                    <button className="bg-blue-500 text-white px-3 py-1 rounded-lg mr-2 flex items-center gap-2 hover:bg-blue-600 transition duration-200">
+                    <button 
+                    onClick={()=>router.push('/restaurant/dashboard/'+item._id)}
+                    className="bg-blue-500 text-white px-3 py-1 rounded-lg mr-2 flex items-center gap-2 hover:bg-blue-600 transition duration-200">
                       <FaEdit /> Edit
                     </button>
                     <button  onClick={()=>deleteFoodItem(item._id)}    className="bg-red-500 text-white px-3 py-1 rounded-lg flex items-center gap-2 hover:bg-red-600 transition duration-200">
