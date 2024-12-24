@@ -16,8 +16,7 @@ const RestaurantSignUp = () => {
 
   const handleSignup = async () => {
     if (
-      !email ||
-      !password ||
+      !email || !password ||
       !cPassword ||
       !name ||
       !city ||
@@ -44,11 +43,14 @@ const RestaurantSignUp = () => {
 
     response = await response.json();
     console.log("this is reponse",response);
+    const {result}=response
+    delete result.password
+   
     
 
    
-    const { password, ...userDataWithoutPassword } = result;
-    localStorage.setItem("restaurantUser", JSON.stringify(userDataWithoutPassword));
+    
+    localStorage.setItem("restaurantUser", JSON.stringify(result));
       router.push("/restaurant/dashboard");
   
     
