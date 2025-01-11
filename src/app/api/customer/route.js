@@ -3,6 +3,7 @@ import { restaurantModel } from "@/app/lib/restaurantsModel";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 export async function GET(request) {
+  let success = false;
   let filter = {};
   let queryParmas = request.nextUrl.searchParams;
 
@@ -15,7 +16,10 @@ export async function GET(request) {
   }
 
   await mongoose.connect(connectionStr);
-  let result = await restaurantModel.findOne(filter);
+  let result = await restaurantModel.find(filter);
+  if (result) {
+    success = true;
+  }
 
-  return NextResponse.json({ result });
+  return NextResponse.json({ result ,success});
 }

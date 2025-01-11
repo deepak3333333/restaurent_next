@@ -41,7 +41,7 @@ const CustomerHeader = () => {
             </Link>
             
             <Link 
-              href="/add-restaurant" 
+              href="/restaurant" 
               className="flex items-center gap-2 text-gray-800 hover:text-blue-500 transition-colors"
             >
               <FaPlusCircle className="h-5 w-5" />
