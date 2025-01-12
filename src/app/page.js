@@ -173,7 +173,7 @@ else if(params?.restaurant){
         {restaurants.map((restaurant, index) => (
           <div 
             key={index} 
-            onClick={()=>router.push('explore/'+restaurant?.name)}
+            onClick={()=>router.push('explore/'+restaurant?.name+"?id="+restaurant._id)}
             className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 p-6 border border-gray-200"
           >
             <div className="space-y-4">
@@ -193,6 +193,8 @@ else if(params?.restaurant){
               <div className="pt-4 border-t border-gray-100">
                 <p className="text-blue-600 hover:text-blue-800 transition-colors duration-300 font-medium">
                  Contact: {restaurant.contact}
+                 emailL:{restaurant.email}
+                 id:{restaurant._id}
                 </p>
               </div>
             </div>
