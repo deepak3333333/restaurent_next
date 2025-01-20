@@ -1,8 +1,38 @@
-import React from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import { FaHome, FaUser, FaShoppingCart, FaPlusCircle } from 'react-icons/fa';
 import Link from 'next/link';
 
-const CustomerHeader = () => {
+
+const CustomerHeader = (props) => {
+ let cartStorage=localStorage.getItem("cart")
+  const [cartNumber,setCartNumber]=useState(cartStorage.length)
+  const [cartItem,setCartItem]=useState()
+
+
+
+  useEffect(()=>{
+    // console.log(props.cartData,"this is deepakj");
+    if(props.cartData){
+
+
+      
+    }
+    else{
+      setCartNumber(1)
+      setCartItem([props.cartData])
+      localStorage.setItem("cart",JSON.stringify([props.cartData]))
+
+
+    }
+
+
+    
+
+  },[props.cartData])
+  
+ 
+  
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto px-4 py-4">
@@ -37,7 +67,7 @@ const CustomerHeader = () => {
               className="flex items-center gap-2 text-gray-800 hover:text-blue-500 transition-colors"
             >
               <FaShoppingCart className="h-5 w-5" />
-              <span className="font-medium">Cart</span>
+              <span className="font-medium">Cart({cartNumber})</span>
             </Link>
             
             <Link 

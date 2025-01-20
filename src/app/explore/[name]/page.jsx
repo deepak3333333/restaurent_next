@@ -9,10 +9,21 @@ const Page = () => {
   const [restaurantDetails, setRestaurantDetails] = useState('');
   const [foodItems, setFoodItems] = useState([]);
   const searchParams = useSearchParams();
+  const [cartData,setCartData]=useState()
 
   useEffect(() => {
     loadRestaurantDetails();
   }, []);
+
+
+
+  const addToCart=(item)=>{
+    setCartData(item)
+    // console.log("this is cart data added ",cartData);
+    
+
+
+  }
 
   const loadRestaurantDetails = async () => {
     const id = searchParams.get('id');
@@ -30,7 +41,7 @@ const Page = () => {
 
   return (
     <>
-      <CustomerHeader />
+      <CustomerHeader cartData={cartData}/>
 
       {/* Hero Section */}
       <div
@@ -82,9 +93,9 @@ const Page = () => {
       <section className="p-6 bg-gray-50">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">Menu</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {foodItems.map((item) => (
+          {foodItems.map((item, index) => (
             <div
-              key={item.id} // Unique key for each child
+              key={item._id || item.id || `food-item-${index}`}
               className="border rounded-lg shadow-lg p-4 bg-white hover:shadow-2xl transform hover:scale-105 transition duration-300"
             >
               <img
@@ -100,7 +111,22 @@ const Page = () => {
                 <p className="text-lg font-medium text-gray-800">
                   Price: Rs:{item.price}
                 </p>
-                <button>Add to cart</button>
+                <button 
+                onClick={()=>addToCart(item)}
+                
+                
+                
+                className="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transform hover:scale-105 transition duration-300 flex items-center justify-center space-x-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                  </svg>
+                  <span>Add to Cart</span>
+                </button>
               </div>
             </div>
           ))}
