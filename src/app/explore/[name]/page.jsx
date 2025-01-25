@@ -14,6 +14,8 @@ const Page = () => {
   //this state for storing the cart data from localstorage
   const [cartIds, setCartIds] = useState(cartStorage.map((item) => item._id));
   //this state for storing the ids of cartStorage food
+
+  const [removeCartData,setRemoveCartData]=useState()
  
   
   
@@ -29,14 +31,22 @@ const Page = () => {
   const addToCart=(item)=>{
     setCartData(item)
     // console.log("this is cart data added ",cartData);
-
-
-    let localcartIds=cartIds
+let localcartIds=cartIds
     localcartIds.push(item._id)
     setCartIds(localcartIds)
     
 
 
+  }
+  const removeFromCart=(id)=>{
+   setRemoveCartData(id)
+   //it filter the id from cartIds and store it in localIds
+   let localIds=cartIds.filter((item)=>item!==id)
+   setCartIds(localIds)
+   
+
+    
+    
   }
 
   const loadRestaurantDetails = async () => {
@@ -55,7 +65,7 @@ const Page = () => {
 
   return (
     <>
-      <CustomerHeader cartData={cartData}/>
+      <CustomerHeader cartData={cartData} removeCartData={removeCartData}/>
 
       {/* Hero Section */}
       <div
@@ -131,6 +141,11 @@ const Page = () => {
 
 
                 <button
+
+
+                  onClick={()=>removeFromCart(item._id)}
+
+
                 className="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transform hover:scale-105 transition duration-300 flex items-center justify-center space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

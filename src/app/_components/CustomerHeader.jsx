@@ -24,7 +24,22 @@ const CustomerHeader = (props) => {
     }
   }, []);
   //empty dependency array means this useEffect will run only once when component mounts
+useEffect(()=>{
 
+
+  if(props.removeCartData){
+    let localCartItem=cartItems.filter((item)=>{
+      return item._id!=props.removeCartData
+    })
+
+    setCartItems(localCartItem)
+    setCartCount(cartCount-1)
+    localStorage.setItem("cart", JSON.stringify(localCartItem));
+
+    
+  }
+
+},[props.removeCartData])
   //when user add food to cart
   useEffect(() => {
     if (props.cartData) {
