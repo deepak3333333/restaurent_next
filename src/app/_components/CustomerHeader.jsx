@@ -102,7 +102,7 @@ useEffect(()=>{
             </Link>
 
             <Link
-              href="/cart"
+              href={cartCount?"/cart":"#"}
               className="flex items-center gap-2 text-gray-800 hover:text-blue-500 transition-colors relative"
             >
               <FaShoppingCart className="h-5 w-5" />
