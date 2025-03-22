@@ -2,12 +2,39 @@
 import React, { useEffect, useState } from "react";
 import { FaHome, FaUser, FaShoppingCart, FaPlusCircle } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 const CustomerHeader = (props) => {
   //this state for the totla number of food  into cart
   const [cartCount, setCartCount] = useState(0);
   //this state for  storing the foods into the state
   const [cartItems, setCartItems] = useState([]);
+  const[userData,setUserData]=useState('');
+  
+  
+  const router=useRouter()
+  useEffect(() => {
+    try {
+      const data = localStorage.getItem("user");
+      if (data) {
+        const parsedData = JSON.parse(data);
+        // Handle both array and object formats
+        const userData = Array.isArray(parsedData) ? parsedData[0] : parsedData;
+        console.log("Parsed user data:", userData); // Debug log
+        setUserData(userData);
+      }
+    } catch (error) {
+      console.error("Error parsing user data:", error);
+    }
+  }, []);
+  const hadleLogout=()=>{
+
+    localStorage.removeItem("user")
+    router.push("/customerregistatoin")
+    
+    
+  }
 
   //load initial cart data when component mouts
   useEffect(() => {
@@ -85,6 +112,19 @@ useEffect(()=>{
           </div>
 
           <nav className="flex items-center space-x-6">
+
+
+          {userData && (
+  <h1 className="text-4xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 p-4 text-center animate-fadeIn hover:scale-105 transition-transform duration-300 cursor-pointer">
+    {userData && userData.name && (
+  <h1 className="text-4xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 p-4 text-center animate-fadeIn hover:scale-105 transition-transform duration-300 cursor-pointer">
+   {userData && userData.name && (
+  <h1> Welcome:{userData.name}</h1>
+)}
+  </h1>
+)}
+  </h1>
+)}
             <Link
               href="/"
               className="flex items-center gap-2 text-gray-800 hover:text-blue-500 transition-colors"
@@ -93,13 +133,26 @@ useEffect(()=>{
               <span className="font-medium">Home</span>
             </Link>
 
+          
+
+            {userData?
+            <>
+            <button onClick={hadleLogout}>
+              Logout
+            </button>
+            
+            </>:
+            <>
+            
             <Link
-              href="/login"
+              href="/customerregistatoin"
               className="flex items-center gap-2 text-gray-800 hover:text-blue-500 transition-colors"
             >
               <FaUser className="h-5 w-5" />
               <span className="font-medium">Login/SignUp</span>
             </Link>
+            
+            </>}
 
             <Link
               href={cartCount?"/cart":"#"}
