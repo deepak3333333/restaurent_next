@@ -32,7 +32,14 @@ function Page() {
         localStorage.setItem('cart', JSON.stringify(updatedCart));
     };
     const handleOrder=()=>{
+
+
+        if(JSON.parse(localStorage.getItem("user"))){
         router.push('/order')
+        }
+        else{
+            router.push('/customerregistatoin?order=true')
+        }
        
         
     }

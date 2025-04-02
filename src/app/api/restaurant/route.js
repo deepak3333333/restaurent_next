@@ -35,7 +35,7 @@ export async function POST(request){
         //user signup
         const restaurant= new restaurantModel(payload)
         const result= await restaurant.save()
-        console.log(result,"this isdjdklkdlkjl");
+        // console.log(result,"this isdjdklkdlkjl");
         
         if(result){
             success=true

@@ -1,7 +1,17 @@
+'use client'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useSearchParams } from "next/navigation";
 
-const UserLoing = () => {
+const UserLoing = (props) => {
+  const searchParams = useSearchParams();
+  const order = searchParams.get("order"); // Correct way to access query params
+  console.log(order, "this is order");
+  
+
+ 
+ 
+  
     const [email,setEmail] = React.useState('')
     const [password,setPassword] = React.useState('')
     const router=useRouter()
@@ -13,8 +23,21 @@ const UserLoing = () => {
       })
       response= await response.json()
       if(response.success){
+        if(order){
+          
+          
+          router.push("/cart")
+
+
+        }
+        else{
+          router.push("/")
+          
+          
+
+        }
       const {result}=response
-      console.log(result, "THi is result of ");
+     
       
       delete result.password
       localStorage.setItem("user",JSON.stringify(result))

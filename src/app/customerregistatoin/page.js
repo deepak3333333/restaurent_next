@@ -6,8 +6,10 @@ import UserSignup from '../_components/UserSignup'
 import UserLoing from '../_components/UserLoing'
 
 
-const page = () => {
+const page = (props) => {
     const [login,setLogin]=useState(true)
+    
+    
   return (
 
     
@@ -17,7 +19,7 @@ const page = () => {
 </div>
 <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
-        {login?<UserLoing/>:<UserSignup/>}
+        {login?<UserLoing redirect={props.searchParams}/>:<UserSignup    redirect={props.searchParams}/>}
         <div className="mt-4 text-center">
           <button 
             className="text-blue-600 hover:text-blue-800 transition-colors font-medium"

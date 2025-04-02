@@ -34,9 +34,34 @@ function Page() {
         localStorage.setItem('cart', JSON.stringify(updatedCart));
     };
     
-    const handleOrder = () => {
-        alert("Your order has been placed successfully!");
-        console.log(userData,"this is first sdjfas;d");
+    const handleOrder =async () => {
+        const parsedData = JSON.parse(localStorage.getItem("user"));
+        const user = Array.isArray(parsedData) ? parsedData[0] : parsedData;
+        let user_id=user._id
+        let cart=JSON.parse(localStorage.getItem('cart'))
+        let foodItemIds=cart.map((item)=>item._id).toString()
+        let resot_id=cart[0].resot_id
+        let delivery_id="fdljo3094u"
+        let response=await fetch("http://localhost:3000/api/order",{
+            method:"POST",
+            body:JSON.stringify({user_id,foodItemIds,resot_id,delivery_id,status:"conform",amount:totalPrice}),
+           
+        })
+        response= await response.json()
+        if(response.success){
+            alert("Order placed successfully")
+            localStorage.removeItem('cart')
+            router.push('/yourfoodorder')
+        }
+        else{
+            alert("Order failed")
+        }
+
+       
+        
+
+
+        
         
     };
 
